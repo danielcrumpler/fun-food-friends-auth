@@ -22,7 +22,7 @@ class App extends Component {
     });
   }
   login() {
-    auth.signInWithPopup(provider) 
+    auth.signInWithPopup(provider)
       .then((result) => {
         const user = result.user;
         this.setState({
@@ -55,7 +55,7 @@ class App extends Component {
     auth.onAuthStateChanged((user) => {
       if (user) {
         this.setState({ user });
-      } 
+      }
     });
     const itemsRef = firebase.database().ref('items');
     itemsRef.on('value', (snapshot) => {
@@ -81,53 +81,55 @@ class App extends Component {
     return (
       <div className='app'>
         <header>
-            <div className="wrapper">
-              <h1>Fun Food Friends</h1>
-              {this.state.user ?
-                <button onClick={this.logout}>Logout</button>                
+          <div className="wrapper">
+            <h1>Exchange</h1>
+            {this.state.user ?
+              <div className='flex-container'>
+                <button onClick={this.logout}>Logout</button>
+                <div className='user-profile'>
+                  <img src={this.state.user.photoURL} />
+                </div>
+              </div>
               :
-                <button onClick={this.login}>Log In</button>              
-              }
-            </div>
+              <button onClick={this.login}>Log In</button>
+            }
+          </div>
         </header>
         {this.state.user ?
           <div>
-            <div className='user-profile'>
-                <img src={this.state.user.photoURL} />
-            </div>
             <div className='container'>
               <section className='add-item'>
-                    <form onSubmit={this.handleSubmit}>
-                      <input type="text" name="username" placeholder="What's your name?" onChange={this.handleChange} value={this.state.user.displayName || this.state.user.email} />
-                      <input type="text" name="currentItem" placeholder="What are you bringing?" onChange={this.handleChange} value={this.state.currentItem} />
-                      <button>Add Item</button>
-                    </form>
+                <form onSubmit={this.handleSubmit}>
+                  <input type="text" name="username" placeholder="What's your name?" onChange={this.handleChange} value={this.state.user.displayName || this.state.user.email} />
+                  <input type="text" name="currentItem" placeholder="What are you bringing?" onChange={this.handleChange} value={this.state.currentItem} />
+                  <button>Add Item</button>
+                </form>
               </section>
 
               <section className='display-item'>
-                  <div className="wrapper">
-                    <ul>
-                      {this.state.items.map((item) => {
-                        return (
-                          <li key={item.id}>
-                            <h3>{item.title}</h3>
-                            <p>brought by: {item.user}
-                              {item.user === this.state.user.displayName || item.user === this.state.user.email ?
-                                <button onClick={() => this.removeItem(item.id)}>Remove Item</button>
+                <div className="wrapper">
+                  <ul>
+                    {this.state.items.map((item) => {
+                      return (
+                        <li key={item.id}>
+                          <h3>{item.title}</h3>
+                          <p>brought by: {item.user}
+                            {item.user === this.state.user.displayName || item.user === this.state.user.email ?
+                              <button onClick={() => this.removeItem(item.id)}>Remove Item</button>
                               : null}
-                            </p>
-                          </li>
-                        )
-                      })}
-                    </ul>
-                  </div>
+                          </p>
+                        </li>
+                      )
+                    })}
+                  </ul>
+                </div>
               </section>
             </div>
           </div>
-        : 
+          :
           <p>You must be logged in to see the potluck list and submit to it.</p>
         }
-        
+
       </div>
     );
   }

@@ -1,12 +1,14 @@
 import firebase from 'firebase';
 
 var config = {
-  apiKey: "AIzaSyAZZta-_cyQ-WCj-exJOjjYy3SJb41CdAQ",
-  authDomain: "fir-react-authentication.firebaseapp.com",
-  databaseURL: "https://fir-react-authentication.firebaseio.com",
-  projectId: "fir-react-authentication",
-  storageBucket: "fir-react-authentication.appspot.com",
-  messagingSenderId: "179937455676"
+  apiKey: "AIzaSyB7Z_qrQ2F6t2uusbmj4-S16lsih8pP7ps",
+  authDomain: "fecundity-91b35.firebaseapp.com",
+  databaseURL: "https://fecundity-91b35-default-rtdb.firebaseio.com",
+  projectId: "fecundity-91b35",
+  storageBucket: "fecundity-91b35.appspot.com",
+  messagingSenderId: "800104935001",
+  appId: "1:800104935001:web:aba22d08ab8f46ac4f0b48",
+  measurementId: "G-XY5WT472H7"
 };
 
 firebase.initializeApp(config);
